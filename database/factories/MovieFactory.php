@@ -17,7 +17,12 @@ class MovieFactory extends Factory
     public function definition()
     {
         return [
-            //
+            'title' => $this->faker->word,
+            'year' => $this->faker->numberBetween(2000, 2022),
+            'category' => $this->faker->text(50),
+            'description' => $this->faker->text(200),
+            'rating' => $this->faker->numberBetween(0, 10),
+            'image' => $this->faker->word
         ];
     }
 }
