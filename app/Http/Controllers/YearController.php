@@ -2,12 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Resources\MovieCollection;
-use App\Http\Resources\MovieResource;
-use App\Models\Movie;
+use App\Models\Year;
 use Illuminate\Http\Request;
 
-class MovieController extends Controller
+class YearController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,9 +14,7 @@ class MovieController extends Controller
      */
     public function index()
     {
-        // $movies = Movie::all();
-        // return new MovieCollection($movies);
-        return new MovieCollection(Movie::all());
+        //
     }
 
     /**
@@ -29,20 +25,16 @@ class MovieController extends Controller
      */
     public function store(Request $request)
     {
-        $movie = Movie::create($request->only([
-            'title', 'year', 'category', 'description', 'rating', 'image'
-        ]));
-
-        return new MovieResource($movie);
+        //
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Movie  $movie
+     * @param  \App\Models\Year  $year
      * @return \Illuminate\Http\Response
      */
-    public function show(Movie $movie)
+    public function show(Year $year)
     {
         //
     }
@@ -51,10 +43,10 @@ class MovieController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Movie  $movie
+     * @param  \App\Models\Year  $year
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Movie $movie)
+    public function update(Request $request, Year $year)
     {
         //
     }
@@ -62,10 +54,10 @@ class MovieController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Movie  $movie
+     * @param  \App\Models\Year  $year
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Movie $movie)
+    public function destroy(Year $year)
     {
         //
     }
