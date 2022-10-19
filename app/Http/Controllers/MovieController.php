@@ -8,6 +8,31 @@ use Illuminate\Http\Response;
 use App\Http\Resources\MovieResource;
 use App\Http\Resources\MovieCollection;
 
+/**
+     * Display a listing of the resource.
+     *
+ * @OA\Get(
+ *     path="/api/movies",
+ *     description="Displays all the movies",
+ *     tags={"Movies"},
+     *      @OA\Response(
+        *          response=200,
+        *          description="Successful operation, Returns a list of Movies in JSON format"
+        *       ),
+        *      @OA\Response(
+        *          response=401,
+        *          description="Unauthenticated",
+        *      ),
+        *      @OA\Response(
+        *          response=403,
+        *          description="Forbidden"
+        *      )
+ * )
+     *
+     * @return \Illuminate\Http\Response
+     */
+
+
 class MovieController extends Controller
 {
     /**
