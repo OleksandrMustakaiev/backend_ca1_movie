@@ -24,8 +24,6 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 Route::apiResource('/movies', MovieController::class);
 
-Route::get('/movies/{movie}', [MovieController::class, 'show']);
-
 Route::resource('/category', CategoryController::class)->only(['index', 'show']);
 
 Route::resource('/year', YearController::class)->only(['index', 'show']);
