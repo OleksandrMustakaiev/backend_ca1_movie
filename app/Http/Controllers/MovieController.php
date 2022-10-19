@@ -2,10 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Resources\MovieCollection;
-use App\Http\Resources\MovieResource;
 use App\Models\Movie;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
+use App\Http\Resources\MovieResource;
+use App\Http\Resources\MovieCollection;
 
 class MovieController extends Controller
 {
@@ -71,6 +72,7 @@ class MovieController extends Controller
      */
     public function destroy(Movie $movie)
     {
-        //
+        $movie->delete();
+        return response()->json(null, Response::HTTP_NO_CONTENT);
     }
 }
