@@ -8,7 +8,10 @@ use Illuminate\Http\Response;
 use App\Http\Resources\MovieResource;
 use App\Http\Resources\MovieCollection;
 
-/**
+
+class MovieController extends Controller
+{
+    /**
      * Display a listing of the resource.
      *
  * @OA\Get(
@@ -31,15 +34,6 @@ use App\Http\Resources\MovieCollection;
      *
      * @return \Illuminate\Http\Response
      */
-
-
-class MovieController extends Controller
-{
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function index()
     {
         // $movies = Movie::all();
@@ -50,8 +44,35 @@ class MovieController extends Controller
     /**
      * Store a newly created resource in storage.
      *
+     * @OA\Post(
+     *      path="/api/movies",
+     *      operationId="store",
+     *      tags={"Movies"},
+     *      summary="Create a new Movie",
+     *      description="Stores the movie in the DB",
+     *      @OA\RequestBody(
+     *         required=true,
+     *         @OA\JsonContent(
+     *            required={"title", "year", "category", "description", "rating", "image"},
+     *            @OA\Property(property="title", type="string", format="string", example="Sample Title"),
+     *            @OA\Property(property="year", type="integer", format="integer", example="Year"),
+     *            @OA\Property(property="category", type="string", format="string", example="Category"),
+     *            @OA\Property(property="description", type="string", format="string", example="A long description about this movie"),
+     *            @OA\Property(property="rating", type="integer", format="integer", example="(Rate up to 10)"),
+     *            @OA\Property(property="image", type="string", format="string", example="Image"),
+     *          )
+     *      ),
+     *     @OA\Response(
+     *          response=200, description="Success",
+     *          @OA\JsonContent(
+     *             @OA\Property(property="status", type="integer", example=""),
+     *             @OA\Property(property="data",type="object")
+     *          )
+     *     )
+     * )
+     *
      * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\MovieResource
      */
     public function store(Request $request)
     {
@@ -64,9 +85,33 @@ class MovieController extends Controller
 
     /**
      * Display the specified resource.
-     *
+     * @OA\Get(
+    *     path="/api/movies/{id}",
+    *     description="Gets a movie by ID",
+    *     tags={"Movies"},
+    *          @OA\Parameter(
+        *          name="id",
+        *          description="Movie id",
+        *          required=true,
+        *          in="path",
+        *          @OA\Schema(
+        *              type="integer")
+     *          ),
+        *      @OA\Response(
+        *          response=200,
+        *          description="Successful operation"
+        *       ),
+        *      @OA\Response(
+        *          response=401,
+        *          description="Unauthenticated",
+        *      ),
+        *      @OA\Response(
+        *          response=403,
+        *          description="Forbidden"
+        *      )
+ * )
      * @param  \App\Models\Movie  $movie
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\MovieResource
      */
     public function show(Movie $movie)
     {
@@ -90,6 +135,27 @@ class MovieController extends Controller
     }
 
     /**
+     *
+     *
+     * @OA\Delete(
+     *    path="/api/movies/{id}",
+     *    operationId="destroy",
+     *    tags={"Movies"},
+     *    summary="Delete a Movie",
+     *    description="Delete Movie",
+     *    @OA\Parameter(name="id", in="path", description="Id of a Movie", required=true,
+     *        @OA\Schema(type="integer")
+     *    ),
+     *    @OA\Response(
+     *         response=Response::HTTP_NO_CONTENT,
+     *         description="Success",
+     *         @OA\JsonContent(
+     *         @OA\Property(property="status_code", type="integer", example="204"),
+     *         @OA\Property(property="data",type="object")
+     *          ),
+     *       )
+     *      )
+     *  )
      * Remove the specified resource from storage.
      *
      * @param  \App\Models\Movie  $movie
