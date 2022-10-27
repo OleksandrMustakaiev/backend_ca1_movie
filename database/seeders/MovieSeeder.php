@@ -15,6 +15,6 @@ class MovieSeeder extends Seeder
      */
     public function run()
     {
-        Movie::factory()->times(50)->create();
+        Movie::factory()->times(50)->create(); // to create random "movies" To run this use "sail artisan db:seed --class=MovieSeeder"
     }
 }

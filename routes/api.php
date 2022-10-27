@@ -1,6 +1,5 @@
 <?php
 
-use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\MovieController;
 use App\Http\Controllers\YearController;
 use Illuminate\Http\Request;
@@ -21,8 +20,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::apiResource('/movies', MovieController::class);
+Route::apiResource('/movies', MovieController::class); // create all routes for the MovieController 
 
-Route::resource('/category', CategoryController::class)->only(['index', 'show']);
 
-Route::resource('/year', YearController::class)->only(['index', 'show']);
+Route::resource('/year', YearController::class)->only(['index', 'show']); // dont need it for now

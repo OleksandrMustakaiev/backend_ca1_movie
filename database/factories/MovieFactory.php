@@ -14,7 +14,7 @@ class MovieFactory extends Factory
      *
      * @return array<string, mixed>
      */
-    public function definition()
+    public function definition() // to create fake information. To run this use seeders "sail artisan db:seed --class=MovieSeeder"
     {
         return [
             'title' => $this->faker->word,

@@ -7,6 +7,8 @@ use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Routing\Controller as BaseController;
 
+// Main information of swagger documentation page
+
 /**
  * @OA\Info(
  *      version="2.0.0",

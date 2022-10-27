@@ -34,7 +34,7 @@ class MovieController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index() // to view all movies localhost/api/movies
     {
         // $movies = Movie::all();
         // return new MovieCollection($movies);
@@ -74,7 +74,7 @@ class MovieController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\MovieResource
      */
-    public function store(Request $request)
+    public function store(Request $request) // create new movie / attributes for each movie using insomnia or swagger
     {
         $movie = Movie::create($request->only([
             'title', 'year', 'category', 'description', 'rating', 'image'
@@ -113,7 +113,7 @@ class MovieController extends Controller
      * @param  \App\Models\Movie  $movie
      * @return \Illuminate\Http\MovieResource
      */
-    public function show(Movie $movie)
+    public function show(Movie $movie) // returning back movies
     {
         return new MovieResource($movie);
     }
@@ -125,7 +125,7 @@ class MovieController extends Controller
      * @param  \App\Models\Movie  $movie
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Movie $movie)
+    public function update(Request $request, Movie $movie) // update any information for each movie using insomnia or swagger
     {
         $movie->update($request->only([
             'title', 'year', 'category', 'description', 'rating', 'image'
@@ -161,7 +161,7 @@ class MovieController extends Controller
      * @param  \App\Models\Movie  $movie
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Movie $movie)
+    public function destroy(Movie $movie) // to delete movie by id using insomnia or swagger
     {
         $movie->delete();
         return response()->json(null, Response::HTTP_NO_CONTENT);
