@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class ProductionCompany extends Model
 {
     use HasFactory;
+    protected $fillable = ['name', 'address'];
 
     public function movies()
     {
