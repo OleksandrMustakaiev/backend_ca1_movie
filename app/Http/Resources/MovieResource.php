@@ -19,7 +19,10 @@ class MovieResource extends JsonResource
             'title' => $this->title,
             'year' => $this->year,
             'category' => $this->category,
-            'rating' => $this->rating
+            'rating' => $this->rating,
+            'production_company_id' => $this->production_company->id,
+            'production_company_name' => $this->production_company->name,
+            'production_company_address' => $this->production_company->address
         ];
     }
 }

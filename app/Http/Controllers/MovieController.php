@@ -38,7 +38,8 @@ class MovieController extends Controller
     {
         // $movies = Movie::all();
         // return new MovieCollection($movies);
-        return new MovieCollection(Movie::all());
+        // return new MovieCollection(Movie::all());
+        return new MovieCollection(Movie::with('production_company')->get());
     }
 
     /**
@@ -76,9 +77,15 @@ class MovieController extends Controller
      */
     public function store(Request $request) // create new movie / attributes for each movie using insomnia or swagger
     {
-        $movie = Movie::create($request->only([
-            'title', 'year', 'category', 'description', 'rating', 'image'
-        ]));
+        $movie = Movie::create([
+            'title' => $request->title,
+            'year' => $request->year,
+            'category' => $request->category,
+            'description' => $request->description,
+            'rating' => $request->rating,
+            'image' => $request->image,
+            'production_company_id' => $request->production_company_id
+        ]);
 
         return new MovieResource($movie);
     }
@@ -128,7 +135,7 @@ class MovieController extends Controller
     public function update(Request $request, Movie $movie) // update any information for each movie using insomnia or swagger
     {
         $movie->update($request->only([
-            'title', 'year', 'category', 'description', 'rating', 'image'
+            'title', 'year', 'category', 'description', 'rating', 'image', 'production_company_id'
         ]));
 
         return new MovieResource($movie);

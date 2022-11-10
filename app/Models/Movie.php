@@ -8,6 +8,11 @@ use Illuminate\Database\Eloquent\Model;
 class Movie extends Model
 {
     use HasFactory;
-    protected $fillable = ['title', 'year', 'category', 'description', 'rating', 'image'];
+    protected $fillable = ['title', 'year', 'category', 'description', 'rating', 'image', 'production_company_id'];
     //protected $guarded = [];
+
+    public function production_company()
+    {
+        return $this->belongsTo(ProductionCompany::class);
+    }
 }
