@@ -10,8 +10,38 @@ use Illuminate\Http\Response;
 
 class AuthController extends Controller
 {
+
+    /**
+     * Register
+     *
+     * @OA\Post(
+     *      path="/api/auth/register",
+     *      operationId="register",
+     *      tags={"Authorization"},
+     *      summary="Register",
+     *      description="Register",
+     *      @OA\RequestBody(
+     *         required=true,
+     *         @OA\JsonContent(
+     *            required={"name", "email", "password"},
+     *            @OA\Property(property="name", type="string", format="string", example="Admin Test"),
+     *            @OA\Property(property="email", type="string", format="string", example="test@laravel.ie"),
+     *            @OA\Property(property="password", type="string", format="string", example="secret")            
+     *            
+     *          )
+     *      ),
+     *     @OA\Response(
+     *          response=200, description="Success",
+     *          @OA\JsonContent(
+     *             @OA\Property(property="status", type="integer", example=""),
+     *             @OA\Property(property="data",type="object")
+     *          )
+     *     )
+     * )
+     */
+
     //! Register function
-    //* name, email and password should be passed in as part of the request
+    //! name, email and password should be passed in as part of the request
     public function register(Request $request)
     {
         try {
@@ -63,6 +93,35 @@ class AuthController extends Controller
             ], Response::HTTP_INTERNAL_SERVER_ERROR);
         }
     }
+
+
+    /**
+     * Login
+     *
+     * @OA\Post(
+     *      path="/api/auth/login",
+     *      operationId="login",
+     *      tags={"Authorization"},
+     *      summary="Login",
+     *      description="Login",
+     *      @OA\RequestBody(
+     *         required=true,
+     *         @OA\JsonContent(
+     *            required={"email", "password"},
+     *            @OA\Property(property="email", type="string", format="string", example="test@laravel.ie"),
+     *            @OA\Property(property="password", type="string", format="string", example="secret")            
+     *            
+     *          )
+     *      ),
+     *     @OA\Response(
+     *          response=200, description="Success",
+     *          @OA\JsonContent(
+     *             @OA\Property(property="status", type="integer", example=""),
+     *             @OA\Property(property="data",type="object")
+     *          )
+     *     )
+     * )
+     */
 
     //! Login function
     public function login(Request $request)

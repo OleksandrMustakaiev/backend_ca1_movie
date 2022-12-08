@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::table('movies', function (Blueprint $table) {
             $table->unsignedBigInteger('production_company_id');
-            $table->foreign('production_company_id')->references('id')->on('production_companies')->onUpdate('cascade')->onDelete('restrict');
+            $table->foreign('production_company_id')->references('id')->on('production_companies')->onUpdate('cascade')->onDelete('cascade');
         });
     }
 

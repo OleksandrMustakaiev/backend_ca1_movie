@@ -13,15 +13,25 @@ use Illuminate\Routing\Controller as BaseController;
  * @OA\Info(
  *      version="2.0.0",
  *      title="Movie API",
- *      description="Oleksandr Simple Movie API",
- *      @OA\Contact(
+ *      description="Oleksandr's Simple Movie API - CA1 + CA2",
+ *     @OA\Contact(
  *          email="n00202022@iadt.ie"
- *      ),
+ *     ),
  *     @OA\License(
  *         name="Apache 2.0",
  *         url="https://www.apache.org/licenses/LICENSE-2.0.html"
+ *     ),
  *     )
- * )
+ *      @OA\SecurityScheme(
+ *      securityScheme="bearerAuth",
+ *      in="header",
+ *      name="bearerAuth",
+ *      type="http",
+ *      scheme="bearer",
+ *      bearerFormat="JWT",
+ *      )
+ *     
+ * 
  */
 
 class Controller extends BaseController

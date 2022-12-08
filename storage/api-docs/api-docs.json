@@ -2,7 +2,7 @@
     "openapi": "3.0.0",
     "info": {
         "title": "Movie API",
-        "description": "Oleksandr Simple Movie API",
+        "description": "Oleksandr's Simple Movie API - CA1 + CA2",
         "contact": {
             "email": "n00202022@iadt.ie"
         },
@@ -13,12 +13,132 @@
         "version": "2.0.0"
     },
     "paths": {
+        "/api/auth/register": {
+            "post": {
+                "tags": [
+                    "Authorization"
+                ],
+                "summary": "Register",
+                "description": "Register",
+                "operationId": "register",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "name",
+                                    "email",
+                                    "password"
+                                ],
+                                "properties": {
+                                    "name": {
+                                        "type": "string",
+                                        "format": "string",
+                                        "example": "Admin Test"
+                                    },
+                                    "email": {
+                                        "type": "string",
+                                        "format": "string",
+                                        "example": "test@laravel.ie"
+                                    },
+                                    "password": {
+                                        "type": "string",
+                                        "format": "string",
+                                        "example": "secret"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "status": {
+                                            "type": "integer",
+                                            "example": ""
+                                        },
+                                        "data": {
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/auth/login": {
+            "post": {
+                "tags": [
+                    "Authorization"
+                ],
+                "summary": "Login",
+                "description": "Login",
+                "operationId": "login",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "email",
+                                    "password"
+                                ],
+                                "properties": {
+                                    "email": {
+                                        "type": "string",
+                                        "format": "string",
+                                        "example": "test@laravel.ie"
+                                    },
+                                    "password": {
+                                        "type": "string",
+                                        "format": "string",
+                                        "example": "secret"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "status": {
+                                            "type": "integer",
+                                            "example": ""
+                                        },
+                                        "data": {
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
         "/api/movies": {
             "get": {
                 "tags": [
                     "Movies"
                 ],
-                "summary": "Display a listing of the resource.",
+                "summary": "Show all Movies",
                 "description": "Displays all the movies",
                 "operationId": "a7859dc5cd106bbeae5492e22df893ec",
                 "responses": {
@@ -40,6 +160,152 @@
                 "summary": "Create a new Movie",
                 "description": "Stores the movie in the DB",
                 "operationId": "store",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "title",
+                                    "year",
+                                    "category",
+                                    "description",
+                                    "rating",
+                                    "image",
+                                    "production_company_id",
+                                    "directors"
+                                ],
+                                "properties": {
+                                    "title": {
+                                        "type": "string",
+                                        "format": "string",
+                                        "example": "Sample Title"
+                                    },
+                                    "year": {
+                                        "type": "integer",
+                                        "format": "integer",
+                                        "example": "Year"
+                                    },
+                                    "category": {
+                                        "type": "string",
+                                        "format": "string",
+                                        "example": "Category"
+                                    },
+                                    "description": {
+                                        "type": "string",
+                                        "format": "string",
+                                        "example": "A long description about this movie"
+                                    },
+                                    "rating": {
+                                        "type": "integer",
+                                        "format": "integer",
+                                        "example": "(Rate up to 10)"
+                                    },
+                                    "image": {
+                                        "type": "string",
+                                        "format": "string",
+                                        "example": "Image"
+                                    },
+                                    "production_company_id": {
+                                        "type": "integer",
+                                        "format": "integer",
+                                        "example": "1"
+                                    },
+                                    "directors": {
+                                        "type": "array",
+                                        "items": {
+                                            "properties": {
+                                                "": {
+                                                    "type": "integer",
+                                                    "example": "1"
+                                                }
+                                            },
+                                            "type": "object"
+                                        }
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "status": {
+                                            "type": "integer",
+                                            "example": ""
+                                        },
+                                        "data": {
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/movies/{id}": {
+            "get": {
+                "tags": [
+                    "Movies"
+                ],
+                "summary": "View Movie by ID",
+                "description": "Gets a movie by ID",
+                "operationId": "a7031f1ec2eb856acbdd7f7054ed001d",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Movie id",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful operation"
+                    },
+                    "401": {
+                        "description": "Unauthenticated"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    }
+                }
+            },
+            "put": {
+                "tags": [
+                    "Movies"
+                ],
+                "summary": "Edit a Movie by ID",
+                "description": "Edit the movie by ID",
+                "operationId": "edit",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Movie id",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
                 "requestBody": {
                     "required": true,
                     "content": {
@@ -83,6 +349,11 @@
                                         "type": "string",
                                         "format": "string",
                                         "example": "Image"
+                                    },
+                                    "production_company_id": {
+                                        "type": "integer",
+                                        "format": "integer",
+                                        "example": "1"
                                     }
                                 },
                                 "type": "object"
@@ -110,45 +381,18 @@
                             }
                         }
                     }
-                }
-            }
-        },
-        "/api/movies/{id}": {
-            "get": {
-                "tags": [
-                    "Movies"
-                ],
-                "summary": "Display the specified resource.",
-                "description": "Gets a movie by ID",
-                "operationId": "a7031f1ec2eb856acbdd7f7054ed001d",
-                "parameters": [
+                },
+                "security": [
                     {
-                        "name": "id",
-                        "in": "path",
-                        "description": "Movie id",
-                        "required": true,
-                        "schema": {
-                            "type": "integer"
-                        }
+                        "bearerAuth": []
                     }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "Successful operation"
-                    },
-                    "401": {
-                        "description": "Unauthenticated"
-                    },
-                    "403": {
-                        "description": "Forbidden"
-                    }
-                }
+                ]
             },
             "delete": {
                 "tags": [
                     "Movies"
                 ],
-                "summary": "Delete a Movie",
+                "summary": "Delete a Movie by ID",
                 "description": "Delete Movie",
                 "operationId": "destroy",
                 "parameters": [
@@ -182,7 +426,252 @@
                             }
                         }
                     }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/production_company": {
+            "get": {
+                "tags": [
+                    "Production Companies"
+                ],
+                "summary": "Show All Production Companies",
+                "description": "Displays all the production companies",
+                "operationId": "c414ad7ad6e6113fa331f872ca5681fa",
+                "responses": {
+                    "200": {
+                        "description": "Successful operation, Returns a list of Movies in JSON format"
+                    },
+                    "401": {
+                        "description": "Unauthenticated"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    }
                 }
+            },
+            "post": {
+                "tags": [
+                    "Production Companies"
+                ],
+                "summary": "Create a new Production Company",
+                "description": "Stores the production company in the DB",
+                "operationId": "store_production_company",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "name",
+                                    "address"
+                                ],
+                                "properties": {
+                                    "name": {
+                                        "type": "string",
+                                        "format": "string",
+                                        "example": "Admin Test"
+                                    },
+                                    "address": {
+                                        "type": "string",
+                                        "format": "string",
+                                        "example": "Address"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "status": {
+                                            "type": "integer",
+                                            "example": ""
+                                        },
+                                        "data": {
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/production_company/{id}": {
+            "get": {
+                "tags": [
+                    "Production Companies"
+                ],
+                "summary": "View Production Company by ID",
+                "description": "Gets a production company by ID",
+                "operationId": "9cc99dc7f81474193b73650561cf5f73",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Productin Company id",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful operation"
+                    },
+                    "401": {
+                        "description": "Unauthenticated"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    }
+                }
+            },
+            "put": {
+                "tags": [
+                    "Production Companies"
+                ],
+                "summary": "Edit a Production Company by ID",
+                "description": "Edit the Production Company",
+                "operationId": "edit_production_company",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Production Company id",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "name",
+                                    "address"
+                                ],
+                                "properties": {
+                                    "name": {
+                                        "type": "string",
+                                        "format": "string",
+                                        "example": "Admin Test"
+                                    },
+                                    "address": {
+                                        "type": "string",
+                                        "format": "string",
+                                        "example": "Address"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "status": {
+                                            "type": "integer",
+                                            "example": ""
+                                        },
+                                        "data": {
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            },
+            "delete": {
+                "tags": [
+                    "Production Companies"
+                ],
+                "summary": "Delete a Production Company by ID",
+                "description": "Delete Production Company",
+                "operationId": "destroy_production_company",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Id of a Production Company",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "204": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "status_code": {
+                                            "type": "integer",
+                                            "example": "204"
+                                        },
+                                        "data": {
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        }
+    },
+    "components": {
+        "securitySchemes": {
+            "bearerAuth": {
+                "type": "http",
+                "name": "bearerAuth",
+                "in": "header",
+                "bearerFormat": "JWT",
+                "scheme": "bearer"
             }
         }
     }

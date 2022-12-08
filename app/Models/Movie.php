@@ -15,4 +15,9 @@ class Movie extends Model
     {
         return $this->belongsTo(ProductionCompany::class);
     }
+
+    public function directors()
+    {
+        return $this->belongsToMany(Director::class)->withTimestamps();
+    }
 }

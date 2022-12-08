@@ -14,6 +14,11 @@ class MovieResource extends JsonResource
      */
     public function toArray($request)
     {
+        $directors = array();
+        foreach ($this->directors as $director){
+            array_push($directors, $director->name);
+        }
+
         return [
             'id' => $this->id,
             'title' => $this->title,
@@ -22,7 +27,8 @@ class MovieResource extends JsonResource
             'rating' => $this->rating,
             'production_company_id' => $this->production_company->id,
             'production_company_name' => $this->production_company->name,
-            'production_company_address' => $this->production_company->address
+            'production_company_address' => $this->production_company->address,
+            'directors' => $directors
         ];
     }
 }

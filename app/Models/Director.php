@@ -5,7 +5,12 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Year extends Model
+class Director extends Model
 {
     use HasFactory;
+
+    public function movies()
+    {
+        return $this->belongsToMany(Movie::class)->withTimestamps();
+    }
 }
