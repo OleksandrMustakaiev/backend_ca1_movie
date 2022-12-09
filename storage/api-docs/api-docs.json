@@ -16,7 +16,7 @@
         "/api/auth/register": {
             "post": {
                 "tags": [
-                    "Authorization"
+                    "Authentication"
                 ],
                 "summary": "Register",
                 "description": "Register",
@@ -79,7 +79,7 @@
         "/api/auth/login": {
             "post": {
                 "tags": [
-                    "Authorization"
+                    "Authentication"
                 ],
                 "summary": "Login",
                 "description": "Login",
@@ -131,6 +131,69 @@
                         }
                     }
                 }
+            }
+        },
+        "/api/auth/user": {
+            "get": {
+                "tags": [
+                    "Authentication"
+                ],
+                "summary": "Show User",
+                "description": "Displays User",
+                "operationId": "e23e5f9b32cba7953a224624a2a16544",
+                "responses": {
+                    "200": {
+                        "description": "Successful operation, Returns User in JSON format"
+                    },
+                    "401": {
+                        "description": "Unauthenticated"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/auth/logout": {
+            "post": {
+                "tags": [
+                    "Authentication"
+                ],
+                "summary": "Logout",
+                "description": "Logout",
+                "operationId": "logout",
+                "requestBody": {},
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "status": {
+                                            "type": "integer",
+                                            "example": ""
+                                        },
+                                        "data": {
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
             }
         },
         "/api/movies": {

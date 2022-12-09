@@ -17,7 +17,7 @@ class AuthController extends Controller
      * @OA\Post(
      *      path="/api/auth/register",
      *      operationId="register",
-     *      tags={"Authorization"},
+     *      tags={"Authentication"},
      *      summary="Register",
      *      description="Register",
      *      @OA\RequestBody(
@@ -74,7 +74,7 @@ class AuthController extends Controller
             ]);
 
             //? check out the table personal_access_tokens to see the generated tokens
-            $token = $user->createToken('book-store-token')->plainTextToken;
+            $token = $user->createToken('movie-store-token')->plainTextToken;
 
             //? create the successful response including the token
             return response()->json(
@@ -101,7 +101,7 @@ class AuthController extends Controller
      * @OA\Post(
      *      path="/api/auth/login",
      *      operationId="login",
-     *      tags={"Authorization"},
+     *      tags={"Authentication"},
      *      summary="Login",
      *      description="Login",
      *      @OA\RequestBody(
@@ -153,7 +153,7 @@ class AuthController extends Controller
             return response()->json([
                 'status' => true,
                 'message' => 'User Logged In Successfully',
-                'token' => $user->createToken("book-store-token")->plainTextToken
+                'token' => $user->createToken("movie-store-token")->plainTextToken
             ], 200);
 
         }
@@ -166,6 +166,27 @@ class AuthController extends Controller
         }
     }
 
+    /** 
+     * @OA\Get(
+     *     path="/api/auth/user",
+     *     description="Displays User",
+     *     summary="Show User",
+     *     tags={"Authentication"},
+     *     security={{"bearerAuth":{}}},
+     *      @OA\Response(
+     *          response=200,
+     *          description="Successful operation, Returns User in JSON format"
+     *       ),
+     *      @OA\Response(
+     *          response=401,
+     *          description="Unauthenticated",
+     *      ),
+     *      @OA\Response(
+     *          response=403,
+     *          description="Forbidden"
+     *      )
+     * )
+     */
     //! User function
     //* This function returns the user profile, but only if they are logged in so have an authentication token
     public function user()
@@ -173,6 +194,27 @@ class AuthController extends Controller
         return response()->json(['user' => auth()->user()], Response::HTTP_OK);
     }
 
+    /**
+     * Logout
+     *
+     * @OA\Post(
+     *      path="/api/auth/logout",
+     *      operationId="logout",
+     *      tags={"Authentication"},
+     *      summary="Logout",
+     *      description="Logout",
+     *      security={{"bearerAuth":{}}},
+     *      @OA\RequestBody(
+     *      ),
+     *     @OA\Response(
+     *          response=200, description="Success",
+     *          @OA\JsonContent(
+     *             @OA\Property(property="status", type="integer", example=""),
+     *             @OA\Property(property="data",type="object")
+     *          )
+     *     )
+     * )
+     */
     public function logout(Request $request)
     {
 
